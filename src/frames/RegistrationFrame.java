@@ -19,7 +19,6 @@ public class RegistrationFrame extends JFrame {
         rf.setTitle("Warehouse");
         rf.setResizable(false);
         rf.setSize(500, 450);
-
         rf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
@@ -41,7 +40,15 @@ public class RegistrationFrame extends JFrame {
 
         registButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if(roleBox.getSelectedItem() == "Волонтер"){
 
+                }
+                if(roleBox.getSelectedItem() == "Жертва"){
+
+                }
+                if(roleBox.getSelectedItem() == "Адміністратор"){
+
+                }
             }
         });
 

@@ -13,7 +13,6 @@ public class AuthFrame extends JFrame {
         af.setTitle("Warehouse");
         af.setResizable(false);
         af.setSize(450, 250);
-
         af.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         ImagePanel panel = new ImagePanel("source/nebo.jpg");

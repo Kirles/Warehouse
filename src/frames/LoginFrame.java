@@ -18,7 +18,6 @@ public class LoginFrame extends JFrame {
         rf.setTitle("Warehouse");
         rf.setResizable(false);
         rf.setSize(500, 250);
-
         rf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
