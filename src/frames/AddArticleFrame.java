@@ -1,8 +1,11 @@
 package frames;
 
+import database.ArticleType;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Objects;
 
 public class AddArticleFrame extends JFrame {
@@ -57,7 +60,9 @@ public class AddArticleFrame extends JFrame {
         artTypeL.setBounds(10, 170, 100, 25);
         aaf.add(artTypeL);
 
-        String[] options = {"1", "2", "3"};
+        List<String> optionsList = ArticleType.getArticleTypes();
+        int size = optionsList.size();
+        String[] options = optionsList.toArray(new String[size]);
         artTypeBox = new JComboBox<>(options);
         artTypeBox.setBounds(100, 170, 250, 25);
         aaf.add(artTypeBox);

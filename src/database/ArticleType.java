@@ -1,6 +1,8 @@
 package database;
 
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleType {
     private String type;
@@ -9,10 +11,22 @@ public class ArticleType {
         this.type = type;
     }
 
-    public static ArrayList<ArticleType> getArticleTypes(){
-        ArrayList<ArticleType> atl = new ArrayList<ArticleType>();
+    public static List<String> getArticleTypes() {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT type FROM article_type";
+        List<String> types = new ArrayList<>();
 
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
 
-        return atl;
+            while (rs.next()) {
+                types.add(rs.getString("type"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return types;
     }
 }
