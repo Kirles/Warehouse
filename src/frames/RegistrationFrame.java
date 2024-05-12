@@ -1,17 +1,20 @@
 package frames;
 
 import database.User;
+import database.UserType;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class RegistrationFrame extends JFrame {
 
     private static JButton registButton, exitButton;
     private static JTextField nameField, emailField;
     private static JComboBox roleBox;
+    private static boolean flag;
 
     public static void main(String[] args) {
         frame();
@@ -48,14 +51,25 @@ public class RegistrationFrame extends JFrame {
                         JOptionPane.showMessageDialog(new AddArticleFrame(), "Користувач з такою поштою вже існує.", "Помилка!", JOptionPane.ERROR_MESSAGE);
                     }
                     else {
-                        if(roleBox.getSelectedItem() == "Волонтер"){
-
+                        String role = Objects.requireNonNull(roleBox.getSelectedItem()).toString();
+                        int role_id = UserType.getType(role);
+                        User user = new User(nameField.getText(), emailField.getText(), role_id);
+                        if(Objects.equals(role, "Адміністратор")){
+                            if(adminConfirmation()){
+                                User.addUser(user);
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(new AddArticleFrame(), "Пароль не вірний.", "Помилка!", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
-                        if(roleBox.getSelectedItem() == "Потерпілий"){
+                        else {
+                            User.addUser(user);
+                            if(Objects.equals(role, "Волонтер")){
 
-                        }
-                        if(roleBox.getSelectedItem() == "Адміністратор"){
+                            }
+                            if(Objects.equals(role, "Потерпілий")){
 
+                            }
                         }
                     }
                 } catch (SQLException ex) {
@@ -83,4 +97,20 @@ public class RegistrationFrame extends JFrame {
 
         rf.setVisible(true);
     }
+
+    public static boolean adminConfirmation() {
+
+        JPasswordField passwordField = new JPasswordField();
+        Object[] message = {"Введіть пароль:", passwordField};
+        int option = JOptionPane.showConfirmDialog(null, message, "Підтвердження", JOptionPane.OK_CANCEL_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+            char[] inputPassword = passwordField.getPassword();
+            return new String(inputPassword).equals("admin");
+        }
+
+        return false;
+
+    }
+
 }

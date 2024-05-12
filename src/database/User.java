@@ -13,8 +13,15 @@ public class User {
         this.user_type_id = user_type_id;
     }
 
-    public static void addUser(User user) {
-
+    public static void addUser(User user) throws SQLException {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "INSERT INTO users (name, email, user_type_id) VALUES (?, ?, ?)";
+        try (Connection conn = DriverManager.getConnection(url); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.name);
+            pstmt.setString(2, user.email);
+            pstmt.setInt(3, user.user_type_id);
+            pstmt.executeUpdate();
+        }
     }
 
     public static boolean getUser(String email) throws SQLException {
