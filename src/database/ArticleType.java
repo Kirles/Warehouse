@@ -13,7 +13,6 @@ public class ArticleType {
         ArrayList<ArticleType> atl = new ArrayList<ArticleType>();
 
 
-
         return atl;
     }
 }

@@ -11,6 +11,5 @@ public class Main {
         String url = "jdbc:sqlite:warehouse.db";
         conn = DriverManager.getConnection(url);
         AuthFrame.frame();
-
     }
 }

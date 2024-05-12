@@ -1,8 +1,11 @@
 package frames;
 
+import database.User;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class RegistrationFrame extends JFrame {
 
@@ -40,14 +43,23 @@ public class RegistrationFrame extends JFrame {
 
         registButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(roleBox.getSelectedItem() == "Волонтер"){
+                try {
+                    if(User.getUser(emailField.getText())){
+                        JOptionPane.showMessageDialog(new AddArticleFrame(), "Користувач з такою поштою вже існує.", "Помилка!", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        if(roleBox.getSelectedItem() == "Волонтер"){
 
-                }
-                if(roleBox.getSelectedItem() == "Потерпілий"){
+                        }
+                        if(roleBox.getSelectedItem() == "Потерпілий"){
 
-                }
-                if(roleBox.getSelectedItem() == "Адміністратор"){
+                        }
+                        if(roleBox.getSelectedItem() == "Адміністратор"){
 
+                        }
+                    }
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
