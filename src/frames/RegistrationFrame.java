@@ -57,6 +57,8 @@ public class RegistrationFrame extends JFrame {
                         if(Objects.equals(role, "Адміністратор")){
                             if(adminConfirmation()){
                                 User.addUser(user);
+                                AdminFrame.frame();
+                                rf.dispose();
                             }
                             else {
                                 JOptionPane.showMessageDialog(new AddArticleFrame(), "Пароль не вірний.", "Помилка!", JOptionPane.ERROR_MESSAGE);

@@ -10,7 +10,7 @@ public class AddArticleFrame extends JFrame {
     private static JTextField nameF, weightF, manufF;
     private static JLabel nameL, weightL, manufL, artTypeL;
     private static JComboBox artTypeBox;
-    private static JButton addButton;
+    private static JButton addButton, exitButton;
 
     public static void main(String[] args) {
         frame();
@@ -63,10 +63,16 @@ public class AddArticleFrame extends JFrame {
         aaf.add(artTypeBox);
 
         addButton = new JButton();
-        addButton.setText("Add");
+        addButton.setText("Додати");
         addButton.setBounds(150, 220, 100, 25);
         aaf.add(addButton);
         addButton.addActionListener(addButtonListener);
+
+        exitButton = new JButton();
+        exitButton.setText("Назад");
+        exitButton.setBounds(35, 220, 70, 25);
+        aaf.add(exitButton);
+        exitButton.addActionListener(addButtonListener);
 
         aaf.add(panel);
         aaf.setVisible(true);

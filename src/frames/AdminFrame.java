@@ -26,7 +26,8 @@ public class AdminFrame extends JFrame {
 
         addArticleButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                AddArticleFrame.frame();
+                af.dispose();
             }
         });
 
