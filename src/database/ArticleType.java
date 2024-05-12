@@ -3,11 +3,9 @@ package database;
 import java.util.ArrayList;
 
 public class ArticleType {
-    private int ID;
     private String type;
 
-    public ArticleType(int ID, String type) {
-        this.ID = ID;
+    public ArticleType(String type) {
         this.type = type;
     }
 

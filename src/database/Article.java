@@ -1,14 +1,12 @@
 package database;
 
 public class Article {
-    private int ID;
     private String name;
     private float weight;
     private String manufacture;
     private int article_type_id;
     
-    public Article(int ID, String name, float weight, String manufacture, int article_type_id) {
-        this.ID = ID;
+    public Article(String name, float weight, String manufacture, int article_type_id) {
         this.name = name;
         this.weight = weight;
         this.manufacture = manufacture;

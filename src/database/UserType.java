@@ -2,11 +2,9 @@ package database;
 
 public class UserType {
 
-    private int ID;
     private String type;
 
-    public UserType(int ID, String type) {
-        this.ID = ID;
+    public UserType(String type) {
         this.type = type;
     }
 

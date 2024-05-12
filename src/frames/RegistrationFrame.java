@@ -31,7 +31,7 @@ public class RegistrationFrame extends JFrame {
         emailField.setBounds(125, 175, 250, 25);
         emailField.setText("Enter the email");
 
-        String[] options = { "Жертва", "Волонтер", "Адміністратор"};
+        String[] options = { "Потерпілий", "Волонтер", "Адміністратор"};
         roleBox = new JComboBox<>(options);
         roleBox.setBounds(125, 250, 250, 25);
 
@@ -43,7 +43,7 @@ public class RegistrationFrame extends JFrame {
                 if(roleBox.getSelectedItem() == "Волонтер"){
 
                 }
-                if(roleBox.getSelectedItem() == "Жертва"){
+                if(roleBox.getSelectedItem() == "Потерпілий"){
 
                 }
                 if(roleBox.getSelectedItem() == "Адміністратор"){
