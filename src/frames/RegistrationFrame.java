@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class RegistrationFrame extends JFrame {
 
-    private static JButton registButton;
+    private static JButton registButton, exitButton;
     private static JTextField nameField, emailField;
     private static JComboBox roleBox;
 
@@ -52,9 +52,20 @@ public class RegistrationFrame extends JFrame {
             }
         });
 
+        exitButton = new JButton("Назад");
+        exitButton.setBounds(40, 325, 80, 25);
+
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AuthFrame.frame();
+                rf.dispose();
+            }
+        });
+
         rf.add(nameField);
         rf.add(emailField);
         rf.add(registButton);
+        rf.add(exitButton);
         rf.add(roleBox);
         rf.add(panel);
 

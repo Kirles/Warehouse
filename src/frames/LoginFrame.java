@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
 
-    private static JButton loginButton;
+    private static JButton loginButton, exitButton;
     private static JTextField emailField;
 
     public static void main(String[] args) {
@@ -35,8 +35,19 @@ public class LoginFrame extends JFrame {
             }
         });
 
+        exitButton = new JButton("Назад");
+        exitButton.setBounds(40, 150, 80, 25);
+
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AuthFrame.frame();
+                rf.dispose();
+            }
+        });
+
         rf.add(emailField);
         rf.add(loginButton);
+        rf.add(exitButton);
         rf.add(panel);
 
         rf.setVisible(true);

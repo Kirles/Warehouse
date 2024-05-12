@@ -22,8 +22,8 @@ public class AuthFrame extends JFrame {
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                af.setVisible(false);
-
+                af.dispose();
+                LoginFrame.frame();
             }
         });
 
@@ -32,8 +32,8 @@ public class AuthFrame extends JFrame {
 
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                af.setVisible(false);
                 RegistrationFrame.frame();
+                af.dispose();
             }
         });
 
