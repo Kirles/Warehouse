@@ -1,5 +1,6 @@
 package database;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class User {
@@ -42,4 +43,40 @@ public class User {
 
         return false;
     }
+
+    public static String getUserRole(String email) throws SQLException {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT ut.type FROM users u JOIN user_type ut ON u.user_type_id = ut.id WHERE u.email = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("type");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
+
+    public static boolean adminConfirmation() {
+
+        JPasswordField passwordField = new JPasswordField();
+        Object[] message = {"Введіть пароль:", passwordField};
+        int option = JOptionPane.showConfirmDialog(null, message, "Підтвердження", JOptionPane.OK_CANCEL_OPTION);
+
+        if (option == JOptionPane.OK_OPTION) {
+            char[] inputPassword = passwordField.getPassword();
+            return new String(inputPassword).equals("admin");
+        }
+
+        return false;
+
+    }
+
 }

@@ -55,7 +55,7 @@ public class RegistrationFrame extends JFrame {
                         int role_id = UserType.getType(role);
                         User user = new User(nameField.getText(), emailField.getText(), role_id);
                         if(Objects.equals(role, "Адміністратор")){
-                            if(adminConfirmation()){
+                            if(User.adminConfirmation()){
                                 User.addUser(user);
                                 AdminFrame.frame();
                                 rf.dispose();
@@ -68,9 +68,11 @@ public class RegistrationFrame extends JFrame {
                             User.addUser(user);
                             if(Objects.equals(role, "Волонтер")){
 
+                                rf.dispose();
                             }
                             if(Objects.equals(role, "Потерпілий")){
 
+                                rf.dispose();
                             }
                         }
                     }
@@ -98,21 +100,6 @@ public class RegistrationFrame extends JFrame {
         rf.add(panel);
 
         rf.setVisible(true);
-    }
-
-    public static boolean adminConfirmation() {
-
-        JPasswordField passwordField = new JPasswordField();
-        Object[] message = {"Введіть пароль:", passwordField};
-        int option = JOptionPane.showConfirmDialog(null, message, "Підтвердження", JOptionPane.OK_CANCEL_OPTION);
-
-        if (option == JOptionPane.OK_OPTION) {
-            char[] inputPassword = passwordField.getPassword();
-            return new String(inputPassword).equals("admin");
-        }
-
-        return false;
-
     }
 
 }

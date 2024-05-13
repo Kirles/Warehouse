@@ -1,8 +1,13 @@
 package frames;
 
+import database.User;
+import database.UserType;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class LoginFrame extends JFrame {
 
@@ -14,11 +19,11 @@ public class LoginFrame extends JFrame {
     }
 
     public static void frame() {
-        LoginFrame rf = new LoginFrame();
-        rf.setTitle("Warehouse");
-        rf.setResizable(false);
-        rf.setSize(500, 250);
-        rf.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        LoginFrame lf = new LoginFrame();
+        lf.setTitle("Warehouse");
+        lf.setResizable(false);
+        lf.setSize(500, 250);
+        lf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
 
@@ -31,6 +36,34 @@ public class LoginFrame extends JFrame {
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                try {
+                    String email = emailField.getText();
+                    if(!User.getUser(email)){
+                        JOptionPane.showMessageDialog(new AddArticleFrame(), "Користувача з такою поштою не існує.", "Помилка!", JOptionPane.ERROR_MESSAGE);
+                    }
+                    else {
+                        String role = User.getUserRole(email);
+                        if(Objects.equals(role, "Адміністратор")){
+                            if(User.adminConfirmation()){
+                                AdminFrame.frame();
+                                lf.dispose();
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(new AddArticleFrame(), "Пароль не вірний.", "Помилка!", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        if(Objects.equals(role, "Волонтер")){
+
+                            lf.dispose();
+                        }
+                        if(Objects.equals(role, "Потерпілий")){
+
+                            lf.dispose();
+                        }
+                    }
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
 
             }
         });
@@ -41,16 +74,16 @@ public class LoginFrame extends JFrame {
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 AuthFrame.frame();
-                rf.dispose();
+                lf.dispose();
             }
         });
 
-        rf.add(emailField);
-        rf.add(loginButton);
-        rf.add(exitButton);
-        rf.add(panel);
+        lf.add(emailField);
+        lf.add(loginButton);
+        lf.add(exitButton);
+        lf.add(panel);
 
-        rf.setVisible(true);
+        lf.setVisible(true);
     }
 }
 
