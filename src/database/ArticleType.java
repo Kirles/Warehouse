@@ -11,6 +11,21 @@ public class ArticleType {
         this.type = type;
     }
 
+    public static void addArticleType(String type) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "INSERT INTO article_type (type) VALUES (?)";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, type);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
     public static List<String> getArticleTypes() {
         String url = "jdbc:sqlite:warehouse.db";
         String sql = "SELECT type FROM article_type";

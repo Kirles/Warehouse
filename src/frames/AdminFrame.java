@@ -33,14 +33,16 @@ public class AdminFrame extends JFrame {
         addArticleTypeButton.setBounds(45, 100, 200, 25);
 
         addArticleTypeButton.addActionListener(e -> {
-
+            AddArticleTypeFrame.frame();
+            af.dispose();
         });
 
         addWarehouseButton = new JButton("Додати склад");
         addWarehouseButton.setBounds(45, 150, 200, 25);
 
         addWarehouseButton.addActionListener(e -> {
-
+            AddWarehouseFrame.frame();
+            af.dispose();
         });
 
         af.add(addArticleButton);
