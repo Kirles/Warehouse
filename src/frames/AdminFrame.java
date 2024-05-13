@@ -24,29 +24,23 @@ public class AdminFrame extends JFrame {
         addArticleButton = new JButton("Додати предмет");
         addArticleButton.setBounds(45, 50, 200, 25);
 
-        addArticleButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AddArticleFrame.frame();
-                af.dispose();
-            }
+        addArticleButton.addActionListener(e -> {
+            AddArticleFrame.frame();
+            af.dispose();
         });
 
         addArticleTypeButton = new JButton("Додати категорію предмету");
         addArticleTypeButton.setBounds(45, 100, 200, 25);
 
-        addArticleTypeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        addArticleTypeButton.addActionListener(e -> {
 
-            }
         });
 
         addWarehouseButton = new JButton("Додати склад");
         addWarehouseButton.setBounds(45, 150, 200, 25);
 
-        addWarehouseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        addWarehouseButton.addActionListener(e -> {
 
-            }
         });
 
         af.add(addArticleButton);

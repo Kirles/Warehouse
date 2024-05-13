@@ -72,11 +72,17 @@ public class AddArticleFrame extends JFrame {
         addButton.setText("Додати");
         addButton.setBounds(150, 220, 100, 25);
         aaf.add(addButton);
-        addButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        addButton.addActionListener(e -> {
+            if(nameF.getText().isEmpty() || weightF.getText().isEmpty() || manufF.getText().isEmpty()){
+                JOptionPane.showMessageDialog(new AddArticleFrame(), "Недостатньо інформації.", "Помилка!", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
                 int category_id = ArticleType.getArticleTypeID(Objects.requireNonNull(artTypeBox.getSelectedItem()).toString());
                 Article article = new Article(nameF.getText(), Float.parseFloat(weightF.getText()), manufF.getText(), category_id);
                 Article.addArticle(article);
+                nameF.setText("");
+                weightF.setText("");
+                manufF.setText("");
             }
         });
 
@@ -84,11 +90,9 @@ public class AddArticleFrame extends JFrame {
         exitButton.setText("Назад");
         exitButton.setBounds(35, 220, 70, 25);
         aaf.add(exitButton);
-        exitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AdminFrame.frame();
-                aaf.dispose();
-            }
+        exitButton.addActionListener(e -> {
+            AdminFrame.frame();
+            aaf.dispose();
         });
 
         aaf.add(panel);

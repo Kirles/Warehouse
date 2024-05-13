@@ -43,52 +43,48 @@ public class RegistrationFrame extends JFrame {
         registButton = new JButton("Зареєструватися");
         registButton.setBounds(175, 325, 150, 25);
 
-        registButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    if(User.getUser(emailField.getText())){
-                        JOptionPane.showMessageDialog(new AddArticleFrame(), "Користувач з такою поштою вже існує.", "Помилка!", JOptionPane.ERROR_MESSAGE);
-                    }
-                    else {
-                        String role = Objects.requireNonNull(roleBox.getSelectedItem()).toString();
-                        int role_id = UserType.getType(role);
-                        User user = new User(nameField.getText(), emailField.getText(), role_id);
-                        if(Objects.equals(role, "Адміністратор")){
-                            if(User.adminConfirmation()){
-                                User.addUser(user);
-                                AdminFrame.frame();
-                                rf.dispose();
-                            }
-                            else {
-                                JOptionPane.showMessageDialog(new AddArticleFrame(), "Пароль не вірний.", "Помилка!", JOptionPane.ERROR_MESSAGE);
-                            }
+        registButton.addActionListener(e -> {
+            try {
+                if(User.getUser(emailField.getText())){
+                    JOptionPane.showMessageDialog(new AddArticleFrame(), "Користувач з такою поштою вже існує.", "Помилка!", JOptionPane.ERROR_MESSAGE);
+                }
+                else {
+                    String role = Objects.requireNonNull(roleBox.getSelectedItem()).toString();
+                    int role_id = UserType.getType(role);
+                    User user = new User(nameField.getText(), emailField.getText(), role_id);
+                    if(Objects.equals(role, "Адміністратор")){
+                        if(User.adminConfirmation()){
+                            User.addUser(user);
+                            AdminFrame.frame();
+                            rf.dispose();
                         }
                         else {
-                            User.addUser(user);
-                            if(Objects.equals(role, "Волонтер")){
-
-                                rf.dispose();
-                            }
-                            if(Objects.equals(role, "Потерпілий")){
-
-                                rf.dispose();
-                            }
+                            JOptionPane.showMessageDialog(new AddArticleFrame(), "Пароль не вірний.", "Помилка!", JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                    else {
+                        User.addUser(user);
+                        if(Objects.equals(role, "Волонтер")){
+
+                            rf.dispose();
+                        }
+                        if(Objects.equals(role, "Потерпілий")){
+
+                            rf.dispose();
+                        }
+                    }
                 }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
         exitButton = new JButton("Назад");
         exitButton.setBounds(40, 325, 80, 25);
 
-        exitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AuthFrame.frame();
-                rf.dispose();
-            }
+        exitButton.addActionListener(e -> {
+            AuthFrame.frame();
+            rf.dispose();
         });
 
         rf.add(nameField);

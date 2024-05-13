@@ -20,21 +20,17 @@ public class AuthFrame extends JFrame {
         loginButton = new JButton("Увійти");
         loginButton.setBounds(40, 75, 150, 25);
 
-        loginButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                af.dispose();
-                LoginFrame.frame();
-            }
+        loginButton.addActionListener(e -> {
+            af.dispose();
+            LoginFrame.frame();
         });
 
         registerButton = new JButton("Зареєструватися");
         registerButton.setBounds(240, 75, 150, 25);
 
-        registerButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                RegistrationFrame.frame();
-                af.dispose();
-            }
+        registerButton.addActionListener(e -> {
+            RegistrationFrame.frame();
+            af.dispose();
         });
 
         af.add(loginButton);
