@@ -1,4 +1,6 @@
-package frames;
+package frames.adminFrames;
+
+import frames.ImagePanel;
 
 import javax.swing.*;
 

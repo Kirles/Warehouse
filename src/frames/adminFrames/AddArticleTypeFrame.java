@@ -1,6 +1,8 @@
-package frames;
+package frames.adminFrames;
 
 import database.ArticleType;
+import frames.ImagePanel;
+
 import javax.swing.*;
 
 public class AddArticleTypeFrame extends JFrame {

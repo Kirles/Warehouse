@@ -1,11 +1,10 @@
 package frames;
 
 import database.User;
-import database.UserType;
+import frames.adminFrames.AddArticleFrame;
+import frames.adminFrames.AdminFrame;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Objects;
 

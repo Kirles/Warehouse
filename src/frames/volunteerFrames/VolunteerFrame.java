@@ -1,6 +1,8 @@
-package frames;
+package frames.volunteerFrames;
 
 import database.Warehouse;
+import frames.ImagePanel;
+import frames.adminFrames.AddArticleFrame;
 
 import javax.swing.*;
 
@@ -25,7 +27,7 @@ public class VolunteerFrame extends JFrame {
         supplayButton.setBounds(45, 50, 200, 25);
 
         supplayButton.addActionListener(e -> {
-            
+
             vf.dispose();
         });
 

@@ -1,7 +1,9 @@
-package frames;
+package frames.adminFrames;
 
 import database.Address;
 import database.Warehouse;
+import frames.ImagePanel;
+
 import javax.swing.*;
 
 public class AddWarehouseFrame extends JFrame {

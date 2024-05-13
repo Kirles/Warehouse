@@ -1,12 +1,16 @@
-package frames;
+package frames.volunteerFrames;
 
 import database.Article;
 import database.ArticleType;
+import frames.ImagePanel;
+import frames.adminFrames.AddArticleFrame;
+import frames.adminFrames.AdminFrame;
+
 import javax.swing.*;
 import java.util.List;
 import java.util.Objects;
 
-public class AddArticleFrame extends JFrame {
+public class SupplayFrame extends JFrame {
 
     private static JTextField nameF, weightF, manufF;
     private static JLabel nameL, weightL, manufL, artTypeL;
@@ -18,57 +22,57 @@ public class AddArticleFrame extends JFrame {
     }
 
     public static void frame() {
-        AddArticleFrame aaf = new AddArticleFrame();
-        aaf.setTitle("Warehouse");
-        aaf.setResizable(false);
-        aaf.setSize(400, 320);
-        aaf.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        SupplayFrame sf = new SupplayFrame();
+        sf.setTitle("Warehouse");
+        sf.setResizable(false);
+        sf.setSize(400, 320);
+        sf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
 
         nameL = new JLabel();
         nameL.setText("Name");
         nameL.setBounds(10, 20, 100, 25);
-        aaf.add(nameL);
+        sf.add(nameL);
 
         nameF = new JTextField();
         nameF.setBounds(100, 20, 250, 25);
-        aaf.add(nameF);
+        sf.add(nameF);
 
         weightL = new JLabel();
         weightL.setText("Wight");
         weightL.setBounds(10, 70, 100, 25);
-        aaf.add(weightL);
+        sf.add(weightL);
 
         weightF = new JTextField();
         weightF.setBounds(100, 70, 250, 25);
-        aaf.add(weightF);
+        sf.add(weightF);
 
         manufL = new JLabel();
         manufL.setText("Manufacture");
         manufL.setBounds(10, 120, 100, 25);
-        aaf.add(manufL);
+        sf.add(manufL);
 
         manufF = new JTextField();
         manufF.setBounds(100, 120, 250, 25);
-        aaf.add(manufF);
+        sf.add(manufF);
 
         artTypeL = new JLabel();
         artTypeL.setText("Type");
         artTypeL.setBounds(10, 170, 100, 25);
-        aaf.add(artTypeL);
+        sf.add(artTypeL);
 
         List<String> optionsList = ArticleType.getArticleTypes();
         int size = optionsList.size();
         String[] options = optionsList.toArray(new String[size]);
         artTypeBox = new JComboBox<>(options);
         artTypeBox.setBounds(100, 170, 250, 25);
-        aaf.add(artTypeBox);
+        sf.add(artTypeBox);
 
         addButton = new JButton();
         addButton.setText("Додати");
         addButton.setBounds(150, 220, 100, 25);
-        aaf.add(addButton);
+        sf.add(addButton);
         addButton.addActionListener(e -> {
             if(nameF.getText().isEmpty() || weightF.getText().isEmpty() || manufF.getText().isEmpty()){
                 JOptionPane.showMessageDialog(new AddArticleFrame(), "Недостатньо інформації.", "Помилка!", JOptionPane.ERROR_MESSAGE);
@@ -86,15 +90,14 @@ public class AddArticleFrame extends JFrame {
         exitButton = new JButton();
         exitButton.setText("Назад");
         exitButton.setBounds(35, 220, 70, 25);
-        aaf.add(exitButton);
+        sf.add(exitButton);
         exitButton.addActionListener(e -> {
             AdminFrame.frame();
-            aaf.dispose();
+            sf.dispose();
         });
 
-        aaf.add(panel);
-        aaf.setVisible(true);
+        sf.add(panel);
+        sf.setVisible(true);
     }
-
 
 }
