@@ -1,15 +1,12 @@
 package database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Address {
     private String street;
     private String building;
 
-    public Address(int ID, String street, String building) {
+    public Address(String street, String building) {
         this.street = street;
         this.building = building;
     }
@@ -30,4 +27,26 @@ public class Address {
             throw new RuntimeException(e);
         }
     }
+
+    public static int getAddressID(Address address) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT id FROM addresses WHERE street = ? AND building = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, address.street);
+            pstmt.setString(2, address.building);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return -1;
+    }
+
 }
