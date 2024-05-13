@@ -1,5 +1,6 @@
 package frames;
 
+import database.Article;
 import database.ArticleType;
 
 import javax.swing.*;
@@ -71,47 +72,28 @@ public class AddArticleFrame extends JFrame {
         addButton.setText("Додати");
         addButton.setBounds(150, 220, 100, 25);
         aaf.add(addButton);
-        addButton.addActionListener(addButtonListener);
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int category_id = ArticleType.getArticleTypeID(Objects.requireNonNull(artTypeBox.getSelectedItem()).toString());
+                Article article = new Article(nameF.getText(), Float.parseFloat(weightF.getText()), manufF.getText(), category_id);
+                Article.addArticle(article);
+            }
+        });
 
         exitButton = new JButton();
         exitButton.setText("Назад");
         exitButton.setBounds(35, 220, 70, 25);
         aaf.add(exitButton);
-        exitButton.addActionListener(addButtonListener);
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AdminFrame.frame();
+                aaf.dispose();
+            }
+        });
 
         aaf.add(panel);
         aaf.setVisible(true);
     }
 
-    private static final ActionListener addButtonListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (nameF.getText().isEmpty() || weightF.getText().isEmpty() || manufF.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(new AddArticleFrame(), "Please enter the info.", "Error!", JOptionPane.ERROR_MESSAGE);
-                //jtf_foodname.requestFocus();
-            }
-            else {
-                String name = nameF.getText();
-                float weight = Float.parseFloat(weightF.getText());
-                String manufacture = manufF.getText();
-                int artType = Integer.parseInt(Objects.requireNonNull(artTypeBox.getSelectedItem()).toString());
-            }
 
-//            else {
-//                int result = JOptionPane.showConfirmDialog(, "Insert this food data " + foodname + "?", "Insert",
-//                        JOptionPane.YES_NO_OPTION,
-//                        JOptionPane.QUESTION_MESSAGE);
-//                if (result == JOptionPane.YES_OPTION) {
-//                    try {
-//                        Statement stmt = conn.createStatement();
-//                        stmt.executeUpdate("insert into tbl_foods (`food_name`, `food_price`, `food_desc`) VALUES ('" +
-//                                foodname + "','" + foodprice + "','" + fooddesc + "')");
-//                        loadData();
-//                    } catch (Exception err) {
-//                        System.out.println(err);
-//                    }
-//                }
-//            }
-        }
-    };
 }

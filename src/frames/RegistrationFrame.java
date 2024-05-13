@@ -14,7 +14,6 @@ public class RegistrationFrame extends JFrame {
     private static JButton registButton, exitButton;
     private static JTextField nameField, emailField;
     private static JComboBox roleBox;
-    private static boolean flag;
 
     public static void main(String[] args) {
         frame();
