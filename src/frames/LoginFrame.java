@@ -3,6 +3,7 @@ package frames;
 import database.User;
 import frames.adminFrames.AddArticleFrame;
 import frames.adminFrames.AdminFrame;
+import frames.victimFrames.VictimFrame;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -55,7 +56,7 @@ public class LoginFrame extends JFrame {
                         lf.dispose();
                     }
                     if(Objects.equals(role, "Потерпілий")){
-
+                        VictimFrame.frame(User.getUserID(email));
                         lf.dispose();
                     }
                 }

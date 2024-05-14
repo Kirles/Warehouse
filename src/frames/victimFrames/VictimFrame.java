@@ -11,10 +11,10 @@ public class VictimFrame extends JFrame {
     private static JButton allWarehouseButton, helpButton;
 
     public static void main(String[] args) {
-        frame();
+        frame(1);
     }
 
-    public static void frame() {
+    public static void frame(int user_id) {
         VictimFrame vf = new VictimFrame();
         vf.setTitle("Warehouse");
         vf.setResizable(false);
@@ -27,7 +27,7 @@ public class VictimFrame extends JFrame {
         helpButton.setBounds(45, 50, 200, 25);
 
         helpButton.addActionListener(e -> {
-            HelpFrame.frame();
+            HelpFrame.frame(user_id);
             vf.dispose();
         });
 

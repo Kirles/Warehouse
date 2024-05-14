@@ -79,4 +79,24 @@ public class User {
 
     }
 
+    public static int getUserID(String email) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT id FROM users WHERE email = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return -1;
+    }
+
 }

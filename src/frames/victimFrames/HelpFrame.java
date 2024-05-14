@@ -1,12 +1,15 @@
 package frames.victimFrames;
 
 import database.Article;
+import database.Order;
+import database.Warehouse;
 import frames.ImagePanel;
 
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,10 +35,10 @@ public class HelpFrame extends JFrame {
     };
 
     public static void main(String[] args) {
-        frame();
+        frame(1);
     }
 
-    public static void frame() {
+    public static void frame(int user_id) {
         HelpFrame hf = new HelpFrame();
         hf.setTitle("Warehouse");
         hf.setResizable(false);
@@ -116,11 +119,38 @@ public class HelpFrame extends JFrame {
         helpButton.setBounds(300, 110, 100, 25);
         hf.add(helpButton);
         helpButton.addActionListener(e -> {
-            
+            if(dtm.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(hf, "Недостатньо інформації");
+            }
+            else {
+                Date currentDate = new Date(System.currentTimeMillis());
+                String[] warehouses = Warehouse.getAllWarehouseName();
+                String selectedWarehouse = showComboBoxInputDialog(hf, warehouses, "Warehouse", "Оберіть склад:");
+                int warehouse_id = Warehouse.getWarehouseID(selectedWarehouse);
+                Order order = new Order(1, user_id, true,  currentDate, warehouse_id);
+                int order_id = Order.addOrder(order);
+
+                while (dtm.getRowCount() > 0) {
+                    dtm.removeRow(0);
+                }
+            }
+
         });
 
         hf.add(panel);
         hf.setVisible(true);
+    }
+
+    public static String showComboBoxInputDialog(JFrame parent, String[] options, String title, String message) {
+        JComboBox<String> comboBox = new JComboBox<>(options);
+
+        int result = JOptionPane.showConfirmDialog(parent, comboBox, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            return (String) comboBox.getSelectedItem();
+        } else {
+            return null;
+        }
     }
 
 }
