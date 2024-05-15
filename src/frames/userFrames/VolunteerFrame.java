@@ -27,7 +27,7 @@ public class VolunteerFrame extends JFrame {
         supplayButton.setBounds(45, 50, 200, 25);
 
         supplayButton.addActionListener(e -> {
-            HelpSupplyFrame.frame(user_id, false);
+            HelpSupplyFrame.frame(user_id, true);
             vf.dispose();
         });
 

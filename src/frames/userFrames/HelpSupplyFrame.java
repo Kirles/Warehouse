@@ -113,7 +113,7 @@ public class HelpSupplyFrame extends JFrame {
         });
 
         helpSupplyButton = new JButton();
-        helpSupplyButton.setText("Запросити");
+        helpSupplyButton.setText("Виконати");
         helpSupplyButton.setBounds(300, 110, 100, 25);
         hf.add(helpSupplyButton);
         helpSupplyButton.addActionListener(e -> {
@@ -125,13 +125,23 @@ public class HelpSupplyFrame extends JFrame {
                 String[] warehouses = Warehouse.getAllWarehouseName();
                 String selectedWarehouse = showComboBoxInputDialog(hf, warehouses, "Warehouse", "Оберіть склад:");
                 int warehouse_id = Warehouse.getWarehouseID(selectedWarehouse);
-                Order order = new Order(1, user_id, x,  currentDate, warehouse_id);
+                int order_type;
+                if(x == true) {
+                    order_type = 2;
+                }
+                else{
+                    order_type = 1;
+                }
+                Order order = new Order(order_type, user_id, false,  currentDate, warehouse_id);
                 int order_id = Order.addOrder(order);
                 List<Integer> idArticleList = new ArrayList<>();
                 List<Integer> amountList = new ArrayList<>();
                 while (dtm.getRowCount() > 0) {
-                    idArticleList.add(Article.getArticleID((String) dtm.getValueAt(0,0)));
-                    amountList.add(Article.getArticleID((String) dtm.getValueAt(0,1)));
+                    String article_name = String.valueOf(dtm.getValueAt(0, 0));
+                    int id = Article.getArticleID(article_name);
+                    idArticleList.add(id);
+                    int amount = Integer.parseInt((String) dtm.getValueAt(0, 1));
+                    amountList.add(amount);
                     dtm.removeRow(0);
                 }
                 int count = 0;
@@ -141,7 +151,7 @@ public class HelpSupplyFrame extends JFrame {
                     OrderItems orderItems = new OrderItems(order_id, articleID, amount);
                     OrderItems.addOrderItems(orderItems);
                     Stock stock = new Stock(articleID, amount, warehouse_id);
-                    count += Stock.updateStock(stock, false);
+                    count += Stock.updateStock(stock, x);
                 }
                 if(count > 0) {
                     Order.updateOrderStatus(order_id);
