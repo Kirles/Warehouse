@@ -54,6 +54,26 @@ public class Article {
         return names;
     }
 
+    public static int getArticleID(String name) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT id FROM articles WHERE product_name = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)){
+
+             pstmt.setString(1, name);
+             ResultSet rs = pstmt.executeQuery();
+
+             while (rs.next()) {
+                 return rs.getInt("id");
+             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return -1;
+    }
+
     public String getName() {
         return name;
     }

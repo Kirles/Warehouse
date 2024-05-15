@@ -45,4 +45,19 @@ public class Order {
         }
     }
 
+    public static void updateOrderStatus(int id){
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "UPDATE orders SET completed = true WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+        }
+    }
+
 }
