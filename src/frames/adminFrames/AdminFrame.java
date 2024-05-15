@@ -9,10 +9,6 @@ public class AdminFrame extends JFrame {
     private static JButton addArticleButton, addWarehouseButton, addArticleTypeButton,
             allArticlesButton, allSupplayButton, allHelpsButton, raportButton;
 
-    public static void main(String[] args) {
-        frame();
-    }
-
     public static void frame() {
         AdminFrame af = new AdminFrame();
         af.setTitle("Warehouse");
@@ -51,7 +47,7 @@ public class AdminFrame extends JFrame {
 
         allArticlesButton.addActionListener(e -> {
 
-            af.dispose();
+            //af.dispose();
         });
 
         allSupplayButton = new JButton("Усі поставки");
@@ -59,7 +55,7 @@ public class AdminFrame extends JFrame {
 
         allSupplayButton.addActionListener(e -> {
 
-            af.dispose();
+            //af.dispose();
         });
 
         allHelpsButton = new JButton("Уся допомога");
@@ -67,7 +63,7 @@ public class AdminFrame extends JFrame {
 
         allHelpsButton.addActionListener(e -> {
 
-            af.dispose();
+            //af.dispose();
         });
 
         raportButton = new JButton("Звіт");
@@ -75,7 +71,7 @@ public class AdminFrame extends JFrame {
 
         raportButton.addActionListener(e -> {
 
-            af.dispose();
+            //af.dispose();
         });
 
         af.add(addArticleButton);

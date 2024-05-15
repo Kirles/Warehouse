@@ -10,10 +10,6 @@ public class VictimFrame extends JFrame {
 
     private static JButton allWarehouseButton, helpButton;
 
-    public static void main(String[] args) {
-        frame(1);
-    }
-
     public static void frame(int user_id) {
         VictimFrame vf = new VictimFrame();
         vf.setTitle("Warehouse");

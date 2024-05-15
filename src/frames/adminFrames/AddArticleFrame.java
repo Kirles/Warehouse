@@ -15,10 +15,6 @@ public class AddArticleFrame extends JFrame {
     private static JComboBox artTypeBox;
     private static JButton addButton, exitButton;
 
-    public static void main(String[] args) {
-        frame();
-    }
-
     public static void frame() {
         AddArticleFrame aaf = new AddArticleFrame();
         aaf.setTitle("Warehouse");

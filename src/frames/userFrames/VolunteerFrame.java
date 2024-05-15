@@ -10,10 +10,6 @@ public class VolunteerFrame extends JFrame {
 
     private static JButton allWarehouseButton, supplayButton;
 
-    public static void main(String[] args) {
-        frame(1);
-    }
-
     public static void frame(int user_id) {
         VolunteerFrame vf = new VolunteerFrame();
         vf.setTitle("Warehouse");

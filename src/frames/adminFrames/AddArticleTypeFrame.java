@@ -10,10 +10,6 @@ public class AddArticleTypeFrame extends JFrame {
     private static JLabel typeL;
     private static JButton addButton, exitButton;
 
-    public static void main(String[] args) {
-        frame();
-    }
-
     public static void frame() {
         AddArticleTypeFrame aatf = new AddArticleTypeFrame();
         aatf.setTitle("Warehouse");

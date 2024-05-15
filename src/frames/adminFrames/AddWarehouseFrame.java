@@ -12,10 +12,6 @@ public class AddWarehouseFrame extends JFrame {
     private static JLabel nameL, streetL, buildL;
     private static JButton addButton, exitButton;
 
-    public static void main(String[] args) {
-        frame();
-    }
-
     public static void frame() {
         AddWarehouseFrame awf = new AddWarehouseFrame();
         awf.setTitle("Warehouse");
