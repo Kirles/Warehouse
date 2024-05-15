@@ -1,5 +1,6 @@
 package database;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,5 +94,61 @@ public class Warehouse {
         }
         return -1;
     }
+
+    public static void deleteWarehouse(String name) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String deleteWarehouseSQL = "DELETE FROM warehouses WHERE name = ?";
+        String deleteAddressSQL = "DELETE FROM addresses WHERE id = (SELECT address_id FROM warehouses WHERE name = ?)";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmtWarehouse = conn.prepareStatement(deleteWarehouseSQL);
+             PreparedStatement pstmtAddress = conn.prepareStatement(deleteAddressSQL)) {
+            pstmtAddress.setString(1, name);
+            pstmtAddress.executeUpdate();
+            pstmtWarehouse.setString(1, name);
+            pstmtWarehouse.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Ошибка при удалении склада: " + e.getMessage());
+        }
+    }
+
+
+    public static String showComboBoxInputDialog(JFrame parent, String[] options, String title, String message) {
+        JComboBox<String> comboBox = new JComboBox<>(options);
+
+        int result = JOptionPane.showConfirmDialog(parent, comboBox, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            return (String) comboBox.getSelectedItem();
+        } else {
+            return null;
+        }
+    }
+
+    public static void updateWarehouse(String name, String newName, String newStreet,String newBuilding) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String updateWarehouseSQL = "UPDATE warehouses SET name = ? WHERE name = ?";
+
+        String updateAddressSQL = "UPDATE addresses SET street = ?, building = ? WHERE id = " +
+                "(SELECT address_id FROM warehouses WHERE name = ?)";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmtWarehouse = conn.prepareStatement(updateWarehouseSQL);
+             PreparedStatement pstmtAddress = conn.prepareStatement(updateAddressSQL)) {
+
+            pstmtWarehouse.setString(1, newName);
+            pstmtWarehouse.setString(2, name);
+            pstmtWarehouse.executeUpdate();
+
+            pstmtAddress.setString(1, newStreet);
+            pstmtAddress.setString(2, newBuilding);
+            pstmtAddress.setString(3, newName);
+            pstmtAddress.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+        }
+    }
+
 
 }

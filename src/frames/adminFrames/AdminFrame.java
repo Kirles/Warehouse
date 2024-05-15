@@ -1,49 +1,116 @@
 package frames.adminFrames;
 
+import database.Warehouse;
 import frames.ImagePanel;
 
 import javax.swing.*;
 
 public class AdminFrame extends JFrame {
 
-    private static JButton addArticleButton, addWarehouseButton, addArticleTypeButton,
+    private static JButton addArticleButton, updateArticleButton, deleteArticleButton,
+            addWarehouseButton, updateWarehouseButton, deleteWarehouseButton,
+            addArticleTypeButton, deleteArticleTypeButton,
             allArticlesButton, allSupplayButton, allHelpsButton, raportButton;
+    private static JLabel queryLabel;
+
+    public static void main(String[] args) {
+        frame();
+    }
 
     public static void frame() {
         AdminFrame af = new AdminFrame();
         af.setTitle("Warehouse");
         af.setResizable(false);
-        af.setSize(350, 470);
+        af.setSize(630, 500);
         af.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
 
         addArticleButton = new JButton("Додати предмет");
-        addArticleButton.setBounds(65, 50, 200, 25);
+        addArticleButton.setBounds(30, 50, 150, 25);
+        af.add(addArticleButton);
 
         addArticleButton.addActionListener(e -> {
             AddArticleFrame.frame();
             af.dispose();
         });
 
-        addArticleTypeButton = new JButton("Додати категорію предмету");
-        addArticleTypeButton.setBounds(65, 100, 200, 25);
+        updateArticleButton = new JButton("Оновити предмет");
+        updateArticleButton.setBounds(230, 50, 150, 25);
+        af.add(updateArticleButton);
+
+        updateArticleButton.addActionListener(e -> {
+
+            af.dispose();
+        });
+
+        deleteArticleButton = new JButton("Видалити предмет");
+        deleteArticleButton.setBounds(430, 50, 150, 25);
+        af.add(deleteArticleButton);
+
+        deleteArticleButton.addActionListener(e -> {
+
+            af.dispose();
+        });
+
+        addArticleTypeButton = new JButton("<html><div style='text-align: center;'>Додати категорію<br>предметів</div></html>");
+        addArticleTypeButton.setBounds(110, 100, 170, 50);
+        af.add(addArticleTypeButton);
 
         addArticleTypeButton.addActionListener(e -> {
-            AddArticleTypeFrame.frame();
+
+            af.dispose();
+        });
+
+
+        deleteArticleTypeButton = new JButton("<html><div style='text-align: center;'>Видалити категорію<br>предметів</div></html>");
+        deleteArticleTypeButton.setBounds(330, 100, 170, 50);
+        af.add(deleteArticleTypeButton);
+
+        deleteArticleTypeButton.addActionListener(e -> {
+
             af.dispose();
         });
 
         addWarehouseButton = new JButton("Додати склад");
-        addWarehouseButton.setBounds(65, 150, 200, 25);
+        addWarehouseButton.setBounds(30, 175, 150, 25);
+        af.add(addWarehouseButton);
 
         addWarehouseButton.addActionListener(e -> {
             AddWarehouseFrame.frame();
             af.dispose();
         });
 
+        updateWarehouseButton = new JButton("Оновити склад");
+        updateWarehouseButton.setBounds(230, 175, 150, 25);
+        af.add(updateWarehouseButton);
+
+        updateWarehouseButton.addActionListener(e -> {
+            String[] warehouses = Warehouse.getAllWarehouseName();
+            String selectedWarehouse = Warehouse.showComboBoxInputDialog(af, warehouses, "Warehouse", "Оберіть склад:");
+            if(selectedWarehouse != null) {
+                UpdateWarehouseFrame.frame(selectedWarehouse);
+            }
+        });
+
+        deleteWarehouseButton = new JButton("Видалити склад");
+        deleteWarehouseButton.setBounds(430, 175, 150, 25);
+        af.add(deleteWarehouseButton);
+
+        deleteWarehouseButton.addActionListener(e -> {
+            String[] warehouses = Warehouse.getAllWarehouseName();
+            String selectedWarehouse = Warehouse.showComboBoxInputDialog(af, warehouses, "Warehouse", "Оберіть склад:");
+            if(selectedWarehouse != null) {
+                Warehouse.deleteWarehouse(selectedWarehouse);
+            }
+        });
+
+        queryLabel = new JLabel("Запити:");
+        queryLabel.setBounds(140, 220, 200, 25);
+        af.add(queryLabel);
+
         allArticlesButton = new JButton("Усі продукти на складах");
-        allArticlesButton.setBounds(65, 200, 200, 25);
+        allArticlesButton.setBounds(65, 250, 200, 25);
 
         allArticlesButton.addActionListener(e -> {
 
@@ -51,7 +118,7 @@ public class AdminFrame extends JFrame {
         });
 
         allSupplayButton = new JButton("Усі поставки");
-        allSupplayButton.setBounds(65, 250, 200, 25);
+        allSupplayButton.setBounds(65, 300, 200, 25);
 
         allSupplayButton.addActionListener(e -> {
 
@@ -59,7 +126,7 @@ public class AdminFrame extends JFrame {
         });
 
         allHelpsButton = new JButton("Уся допомога");
-        allHelpsButton.setBounds(65, 300, 200, 25);
+        allHelpsButton.setBounds(65, 350, 200, 25);
 
         allHelpsButton.addActionListener(e -> {
 
@@ -67,16 +134,13 @@ public class AdminFrame extends JFrame {
         });
 
         raportButton = new JButton("Звіт");
-        raportButton.setBounds(65, 350, 200, 25);
+        raportButton.setBounds(65, 400, 200, 25);
 
         raportButton.addActionListener(e -> {
 
             //af.dispose();
         });
 
-        af.add(addArticleButton);
-        af.add(addArticleTypeButton);
-        af.add(addWarehouseButton);
         af.add(allArticlesButton);
         af.add(allSupplayButton);
         af.add(allHelpsButton);

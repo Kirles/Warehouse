@@ -126,7 +126,7 @@ public class HelpSupplyFrame extends JFrame {
                 String formattedDate = currentDate.format(formatter);
 
                 String[] warehouses = Warehouse.getAllWarehouseName();
-                String selectedWarehouse = showComboBoxInputDialog(hf, warehouses, "Warehouse", "Оберіть склад:");
+                String selectedWarehouse = Warehouse.showComboBoxInputDialog(hf, warehouses, "Warehouse", "Оберіть склад:");
                 int warehouse_id = Warehouse.getWarehouseID(selectedWarehouse);
                 int order_type;
                 if(volunteer) {
@@ -181,18 +181,6 @@ public class HelpSupplyFrame extends JFrame {
 
         hf.add(panel);
         hf.setVisible(true);
-    }
-
-    public static String showComboBoxInputDialog(JFrame parent, String[] options, String title, String message) {
-        JComboBox<String> comboBox = new JComboBox<>(options);
-
-        int result = JOptionPane.showConfirmDialog(parent, comboBox, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-        if (result == JOptionPane.OK_OPTION) {
-            return (String) comboBox.getSelectedItem();
-        } else {
-            return null;
-        }
     }
 
 }

@@ -49,4 +49,36 @@ public class Address {
         return -1;
     }
 
+    public static Address getAddress(String name) {
+
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT a.* FROM warehouses w " +
+                "INNER JOIN addresses a ON w.address_id = a.id " +
+                "WHERE w.name = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String street = rs.getString("street");
+                String building = rs.getString("building");
+                return new Address(street, building);
+            }
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+            return null;
+        }
+        return null;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
 }
