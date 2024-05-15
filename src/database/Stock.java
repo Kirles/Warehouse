@@ -13,15 +13,19 @@ public class Stock {
         this.warehouse_id = warehouse_id;
     }
 
-    public static void updateStock(Stock stock, boolean adding) {
+    public static int updateStock(Stock stock, boolean adding) {
         String url = "jdbc:sqlite:warehouse.db";
+        int x = 0;
         if (adding) {
             increaseStock(stock, url);
+            x++;
         }
         else {
-            decreaseStock(stock, url);
+            if(decreaseStock(stock, url)){
+                x++;
+            }
         }
-
+        return x;
     }
 
     private static void increaseStock(Stock stock, String url) {
@@ -54,7 +58,7 @@ public class Stock {
         }
     }
 
-    private static void decreaseStock(Stock stock, String url) {
+    private static boolean decreaseStock(Stock stock, String url) {
         String sqlSelect = "SELECT * FROM stock WHERE article_id = ? AND warehouse_id = ?";
         String sqlUpdate = "UPDATE stock SET stock_amount = stock_amount - ? WHERE article_id = ? AND warehouse_id = ?";
 
@@ -74,11 +78,13 @@ public class Stock {
                     pstmtUpdate.setInt(2, stock.article_id);
                     pstmtUpdate.setInt(3, stock.warehouse_id);
                     pstmtUpdate.executeUpdate();
+                    return true;
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException("Помилка: " + e.getMessage());
         }
+        return false;
     }
 
 }

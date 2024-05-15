@@ -125,7 +125,7 @@ public class HelpFrame extends JFrame {
                 String[] warehouses = Warehouse.getAllWarehouseName();
                 String selectedWarehouse = showComboBoxInputDialog(hf, warehouses, "Warehouse", "Оберіть склад:");
                 int warehouse_id = Warehouse.getWarehouseID(selectedWarehouse);
-                Order order = new Order(1, user_id, true,  currentDate, warehouse_id);
+                Order order = new Order(1, user_id, false,  currentDate, warehouse_id);
                 int order_id = Order.addOrder(order);
                 List<Integer> idArticleList = new ArrayList<>();
                 List<Integer> amountList = new ArrayList<>();
@@ -134,15 +134,18 @@ public class HelpFrame extends JFrame {
                     amountList.add(Article.getArticleID((String) dtm.getValueAt(0,1)));
                     dtm.removeRow(0);
                 }
+                int count = 0;
                 for (int i = 0; i < amountList.size(); i++) {
                     int articleID = idArticleList.get(i);
                     int amount = amountList.get(i);
                     OrderItems orderItems = new OrderItems(order_id, articleID, amount);
                     OrderItems.addOrderItems(orderItems);
                     Stock stock = new Stock(articleID, amount, warehouse_id);
-                    Stock.updateStock(stock, false);
+                    count += Stock.updateStock(stock, false);
                 }
-                Order.updateOrderStatus(order_id);
+                if(count > 0) {
+                    Order.updateOrderStatus(order_id);
+                }
             }
 
         });
