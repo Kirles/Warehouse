@@ -1,5 +1,6 @@
 import frames.AuthFrame;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class Main {
@@ -10,29 +11,15 @@ public class Main {
         AuthFrame.frame();
     }
 
-    public static void retrieveOrdersByDateRange(String startDate, String endDate) {
-        String url = "jdbc:sqlite:warehouse.db";
-        String sql = "SELECT * FROM orders WHERE date BETWEEN ? AND ?";
+    public static String showComboBoxInputDialog(JFrame parent, String[] options, String title, String message) {
+        JComboBox<String> comboBox = new JComboBox<>(options);
 
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        int result = JOptionPane.showConfirmDialog(parent, comboBox, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-            pstmt.setString(1, startDate);
-            pstmt.setString(2, endDate);
-
-            ResultSet rs = pstmt.executeQuery();
-
-            // Обработка результатов запроса
-            while (rs.next()) {
-                int orderId = rs.getInt("id");
-                int orderTypeId = rs.getInt("order_type_id");
-                int userId = rs.getInt("user_id");
-                boolean completed = rs.getBoolean("completed");
-                // Дополнительные операции с данными заказа, если необходимо
-                System.out.println("Заказ ID: " + orderId + ", Тип заказа ID: " + orderTypeId + ", Пользователь ID: " + userId + ", Завершен: " + completed);
-            }
-        } catch (SQLException e) {
-            System.out.println("Ошибка при выполнении запроса: " + e.getMessage());
+        if (result == JOptionPane.OK_OPTION) {
+            return (String) comboBox.getSelectedItem();
+        } else {
+            return null;
         }
     }
 }

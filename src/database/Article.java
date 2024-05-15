@@ -74,6 +74,32 @@ public class Article {
         return -1;
     }
 
+    public static Article getArticleByID(int id) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT * FROM articles WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setLong(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String productName = rs.getString("product_name");
+                float weight = rs.getFloat("weight");
+                String manufacturer = rs.getString("manufacture");
+                int categoryId = rs.getInt("category_id");
+
+                return new Article(productName, weight, manufacturer, categoryId);
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+            return null;
+        }
+    }
+
     public String getName() {
         return name;
     }
@@ -82,4 +108,26 @@ public class Article {
         return weight;
     }
 
+    public String getManufacture(){
+        return manufacture;
+    }
+
+    public static void updateArticle(int ID, Article newArticle) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "UPDATE articles SET product_name = ?, weight = ?, manufacture = ?, category_id = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, newArticle.name);
+            pstmt.setFloat(2, newArticle.weight);
+            pstmt.setString(3, newArticle.manufacture);
+            pstmt.setInt(4, newArticle.article_type_id);
+            pstmt.setInt(5, ID);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+        }
+    }
 }

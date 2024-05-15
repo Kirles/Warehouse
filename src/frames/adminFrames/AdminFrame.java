@@ -1,9 +1,12 @@
 package frames.adminFrames;
 
+import database.Article;
+import database.ArticleType;
 import database.Warehouse;
 import frames.ImagePanel;
 
 import javax.swing.*;
+import java.util.List;
 
 public class AdminFrame extends JFrame {
 
@@ -40,8 +43,12 @@ public class AdminFrame extends JFrame {
         af.add(updateArticleButton);
 
         updateArticleButton.addActionListener(e -> {
-
-            af.dispose();
+            List<String> articlesList = Article.getArticle();
+            String[] articles = articlesList.toArray(new String[0]);
+            String selectedArticles = Warehouse.showComboBoxInputDialog(af, articles, "Оберіть продукт:");
+            if(selectedArticles != null) {
+               UpdateArticleFrame.frame(Article.getArticleID(selectedArticles));
+            }
         });
 
         deleteArticleButton = new JButton("Видалити предмет");
@@ -58,7 +65,7 @@ public class AdminFrame extends JFrame {
         af.add(addArticleTypeButton);
 
         addArticleTypeButton.addActionListener(e -> {
-
+            AddArticleTypeFrame.frame();
             af.dispose();
         });
 
@@ -87,7 +94,7 @@ public class AdminFrame extends JFrame {
 
         updateWarehouseButton.addActionListener(e -> {
             String[] warehouses = Warehouse.getAllWarehouseName();
-            String selectedWarehouse = Warehouse.showComboBoxInputDialog(af, warehouses, "Warehouse", "Оберіть склад:");
+            String selectedWarehouse = Warehouse.showComboBoxInputDialog(af, warehouses, "Оберіть склад:");
             if(selectedWarehouse != null) {
                 UpdateWarehouseFrame.frame(selectedWarehouse);
             }
@@ -99,7 +106,7 @@ public class AdminFrame extends JFrame {
 
         deleteWarehouseButton.addActionListener(e -> {
             String[] warehouses = Warehouse.getAllWarehouseName();
-            String selectedWarehouse = Warehouse.showComboBoxInputDialog(af, warehouses, "Warehouse", "Оберіть склад:");
+            String selectedWarehouse = Warehouse.showComboBoxInputDialog(af, warehouses, "Оберіть склад:");
             if(selectedWarehouse != null) {
                 Warehouse.deleteWarehouse(selectedWarehouse);
             }

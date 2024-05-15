@@ -126,7 +126,7 @@ public class HelpSupplyFrame extends JFrame {
                 String formattedDate = currentDate.format(formatter);
 
                 String[] warehouses = Warehouse.getAllWarehouseName();
-                String selectedWarehouse = Warehouse.showComboBoxInputDialog(hf, warehouses, "Warehouse", "Оберіть склад:");
+                String selectedWarehouse = Warehouse.showComboBoxInputDialog(hf, warehouses, "Оберіть склад:");
                 int warehouse_id = Warehouse.getWarehouseID(selectedWarehouse);
                 int order_type;
                 if(volunteer) {

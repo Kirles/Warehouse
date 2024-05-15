@@ -112,8 +112,7 @@ public class Warehouse {
         }
     }
 
-
-    public static String showComboBoxInputDialog(JFrame parent, String[] options, String title, String message) {
+    public static String showComboBoxInputDialog(JFrame parent, String[] options, String message) {
         JComboBox<String> comboBox = new JComboBox<>(options);
 
         int result = JOptionPane.showConfirmDialog(parent, comboBox, message, JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
