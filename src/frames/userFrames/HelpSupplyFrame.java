@@ -1,4 +1,4 @@
-package frames.victimFrames;
+package frames.userFrames;
 
 import database.*;
 import frames.ImagePanel;
@@ -11,12 +11,12 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class HelpFrame extends JFrame {
+public class HelpSupplyFrame extends JFrame {
 
     private static JLabel nameL, amountL;
     private static JTextField amountF;
     private static JComboBox nameF;
-    private static JButton addButton, deleteButton, helpButton;
+    private static JButton addButton, deleteButton, helpSupplyButton;
     private static JTable jt;
     private static int row;
 
@@ -33,11 +33,11 @@ public class HelpFrame extends JFrame {
     };
 
     public static void main(String[] args) {
-        frame(1);
+        frame(1, false);
     }
 
-    public static void frame(int user_id) {
-        HelpFrame hf = new HelpFrame();
+    public static void frame(int user_id, boolean x) {
+        HelpSupplyFrame hf = new HelpSupplyFrame();
         hf.setTitle("Warehouse");
         hf.setResizable(false);
         hf.setSize(435, 800);
@@ -112,11 +112,11 @@ public class HelpFrame extends JFrame {
             }
         });
 
-        helpButton = new JButton();
-        helpButton.setText("Запросити");
-        helpButton.setBounds(300, 110, 100, 25);
-        hf.add(helpButton);
-        helpButton.addActionListener(e -> {
+        helpSupplyButton = new JButton();
+        helpSupplyButton.setText("Запросити");
+        helpSupplyButton.setBounds(300, 110, 100, 25);
+        hf.add(helpSupplyButton);
+        helpSupplyButton.addActionListener(e -> {
             if(dtm.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(hf, "Недостатньо інформації");
             }
@@ -125,7 +125,7 @@ public class HelpFrame extends JFrame {
                 String[] warehouses = Warehouse.getAllWarehouseName();
                 String selectedWarehouse = showComboBoxInputDialog(hf, warehouses, "Warehouse", "Оберіть склад:");
                 int warehouse_id = Warehouse.getWarehouseID(selectedWarehouse);
-                Order order = new Order(1, user_id, false,  currentDate, warehouse_id);
+                Order order = new Order(1, user_id, x,  currentDate, warehouse_id);
                 int order_id = Order.addOrder(order);
                 List<Integer> idArticleList = new ArrayList<>();
                 List<Integer> amountList = new ArrayList<>();

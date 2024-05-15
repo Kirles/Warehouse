@@ -3,7 +3,8 @@ package frames;
 import database.User;
 import frames.adminFrames.AddArticleFrame;
 import frames.adminFrames.AdminFrame;
-import frames.victimFrames.VictimFrame;
+import frames.userFrames.VictimFrame;
+import frames.userFrames.VolunteerFrame;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -52,7 +53,7 @@ public class LoginFrame extends JFrame {
                         }
                     }
                     if(Objects.equals(role, "Волонтер")){
-
+                        VolunteerFrame.frame(User.getUserID(email));
                         lf.dispose();
                     }
                     if(Objects.equals(role, "Потерпілий")){

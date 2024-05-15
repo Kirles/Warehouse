@@ -4,6 +4,8 @@ import database.User;
 import database.UserType;
 import frames.adminFrames.AddArticleFrame;
 import frames.adminFrames.AdminFrame;
+import frames.userFrames.VictimFrame;
+import frames.userFrames.VolunteerFrame;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -49,9 +51,10 @@ public class RegistrationFrame extends JFrame {
                     JOptionPane.showMessageDialog(new AddArticleFrame(), "Користувач з такою поштою вже існує.", "Помилка!", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
+                    String email = emailField.getText();
                     String role = Objects.requireNonNull(roleBox.getSelectedItem()).toString();
                     int role_id = UserType.getType(role);
-                    User user = new User(nameField.getText(), emailField.getText(), role_id);
+                    User user = new User(nameField.getText(), email, role_id);
                     if(Objects.equals(role, "Адміністратор")){
                         if(User.adminConfirmation()){
                             User.addUser(user);
@@ -65,11 +68,11 @@ public class RegistrationFrame extends JFrame {
                     else {
                         User.addUser(user);
                         if(Objects.equals(role, "Волонтер")){
-
+                            VolunteerFrame.frame(User.getUserID(email));
                             rf.dispose();
                         }
                         if(Objects.equals(role, "Потерпілий")){
-
+                            VictimFrame.frame(User.getUserID(email));
                             rf.dispose();
                         }
                     }

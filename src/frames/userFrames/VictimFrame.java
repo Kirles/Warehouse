@@ -1,4 +1,4 @@
-package frames.volunteerFrames;
+package frames.userFrames;
 
 import database.Warehouse;
 import frames.ImagePanel;
@@ -6,16 +6,16 @@ import frames.adminFrames.AddArticleFrame;
 
 import javax.swing.*;
 
-public class VolunteerFrame extends JFrame {
+public class VictimFrame extends JFrame {
 
-    private static JButton allWarehouseButton, supplayButton;
+    private static JButton allWarehouseButton, helpButton;
 
     public static void main(String[] args) {
-        frame();
+        frame(1);
     }
 
-    public static void frame() {
-        VolunteerFrame vf = new VolunteerFrame();
+    public static void frame(int user_id) {
+        VictimFrame vf = new VictimFrame();
         vf.setTitle("Warehouse");
         vf.setResizable(false);
         vf.setSize(300, 270);
@@ -23,11 +23,11 @@ public class VolunteerFrame extends JFrame {
 
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
 
-        supplayButton = new JButton("Поставити продукти");
-        supplayButton.setBounds(45, 50, 200, 25);
+        helpButton = new JButton("Запросити допомогу");
+        helpButton.setBounds(45, 50, 200, 25);
 
-        supplayButton.addActionListener(e -> {
-
+        helpButton.addActionListener(e -> {
+            HelpSupplyFrame.frame(user_id, false);
             vf.dispose();
         });
 
@@ -39,7 +39,7 @@ public class VolunteerFrame extends JFrame {
         });
 
 
-        vf.add(supplayButton);
+        vf.add(helpButton);
         vf.add(allWarehouseButton);
         vf.add(panel);
 
