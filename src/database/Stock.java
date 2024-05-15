@@ -13,10 +13,10 @@ public class Stock {
         this.warehouse_id = warehouse_id;
     }
 
-    public static int updateStock(Stock stock, boolean adding) {
+    public static int updateStock(Stock stock, boolean volunteer) {
         String url = "jdbc:sqlite:warehouse.db";
         int x = 0;
-        if (adding) {
+        if (volunteer) {
             increaseStock(stock, url);
             x++;
         }

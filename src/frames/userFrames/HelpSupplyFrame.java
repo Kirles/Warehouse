@@ -6,8 +6,9 @@ import frames.ImagePanel;
 import javax.swing.*;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +17,7 @@ public class HelpSupplyFrame extends JFrame {
     private static JLabel nameL, amountL;
     private static JTextField amountF;
     private static JComboBox nameF;
-    private static JButton addButton, deleteButton, helpSupplyButton;
+    private static JButton addButton, deleteButton, helpSupplyButton, exitButton;
     private static JTable jt;
     private static int row;
 
@@ -32,7 +33,11 @@ public class HelpSupplyFrame extends JFrame {
         }
     };
 
-    public static void frame(int user_id, boolean x) {
+    public static void main(String[] args) {
+        frame(1, false);
+    }
+
+    public static void frame(int user_id, boolean volunteer) {
         HelpSupplyFrame hf = new HelpSupplyFrame();
         hf.setTitle("Warehouse");
         hf.setResizable(false);
@@ -61,8 +66,6 @@ public class HelpSupplyFrame extends JFrame {
         amountF = new JTextField();
         amountF.setBounds(100, 60, 100, 25);
         hf.add(amountF);
-
-        List<String[]> list = new ArrayList<>();
 
         addButton = new JButton();
         addButton.setText("Додати");
@@ -112,23 +115,27 @@ public class HelpSupplyFrame extends JFrame {
         helpSupplyButton.setText("Виконати");
         helpSupplyButton.setBounds(300, 110, 100, 25);
         hf.add(helpSupplyButton);
+
         helpSupplyButton.addActionListener(e -> {
             if(dtm.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(hf, "Недостатньо інформації");
             }
             else {
-                Date currentDate = new Date(System.currentTimeMillis());
+                LocalDate currentDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String formattedDate = currentDate.format(formatter);
+
                 String[] warehouses = Warehouse.getAllWarehouseName();
                 String selectedWarehouse = showComboBoxInputDialog(hf, warehouses, "Warehouse", "Оберіть склад:");
                 int warehouse_id = Warehouse.getWarehouseID(selectedWarehouse);
                 int order_type;
-                if(x == true) {
+                if(volunteer) {
                     order_type = 2;
                 }
                 else{
                     order_type = 1;
                 }
-                Order order = new Order(order_type, user_id, false,  currentDate, warehouse_id);
+                Order order = new Order(order_type, user_id, false,  formattedDate, warehouse_id);
                 int order_id = Order.addOrder(order);
                 List<Integer> idArticleList = new ArrayList<>();
                 List<Integer> amountList = new ArrayList<>();
@@ -147,13 +154,29 @@ public class HelpSupplyFrame extends JFrame {
                     OrderItems orderItems = new OrderItems(order_id, articleID, amount);
                     OrderItems.addOrderItems(orderItems);
                     Stock stock = new Stock(articleID, amount, warehouse_id);
-                    count += Stock.updateStock(stock, x);
+                    count += Stock.updateStock(stock, volunteer);
                 }
                 if(count > 0) {
                     Order.updateOrderStatus(order_id);
                 }
             }
 
+        });
+
+        exitButton = new JButton();
+        exitButton.setText("Вихід");
+        exitButton.setBounds(300, 70, 100, 25);
+        hf.add(exitButton);
+
+        exitButton.addActionListener(e -> {
+            if(volunteer){
+                VolunteerFrame.frame(user_id);
+                hf.dispose();
+            }
+            else {
+                VictimFrame.frame(user_id);
+                hf.dispose();
+            }
         });
 
         hf.add(panel);

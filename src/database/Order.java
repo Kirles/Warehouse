@@ -6,10 +6,10 @@ public class Order {
     private int order_type_id;
     private int user_id;
     private boolean completed;
-    private Date date;
+    private String date;
     private int warehouse_id;
 
-    public Order(int order_type_id, int user_id, boolean completed, Date date, int warehouse_id) {
+    public Order(int order_type_id, int user_id, boolean completed, String date, int warehouse_id) {
         this.order_type_id = order_type_id;
         this.user_id = user_id;
         this.completed = completed;
@@ -27,7 +27,7 @@ public class Order {
             pstmt.setInt(1, order.order_type_id);
             pstmt.setInt(2, order.user_id);
             pstmt.setBoolean(3, order.completed);
-            pstmt.setDate(4, order.date);
+            pstmt.setString(4, order.date);
             pstmt.setInt(5, order.warehouse_id);
 
             pstmt.executeUpdate();
