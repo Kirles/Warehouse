@@ -130,4 +130,19 @@ public class Article {
             System.out.println("Помилка: " + e.getMessage());
         }
     }
+
+    public static void deleteArticle(int ID) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "DELETE FROM articles WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, ID);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+        }
+    }
 }

@@ -56,8 +56,12 @@ public class AdminFrame extends JFrame {
         af.add(deleteArticleButton);
 
         deleteArticleButton.addActionListener(e -> {
-
-            af.dispose();
+            List<String> articlesList = Article.getArticle();
+            String[] articles = articlesList.toArray(new String[0]);
+            String selectedArticles = Warehouse.showComboBoxInputDialog(af, articles, "Оберіть продукт:");
+            if(selectedArticles != null) {
+                Article.deleteArticle(Article.getArticleID(selectedArticles));
+            }
         });
 
         addArticleTypeButton = new JButton("<html><div style='text-align: center;'>Додати категорію<br>предметів</div></html>");
