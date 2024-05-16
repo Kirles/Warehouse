@@ -1,6 +1,8 @@
 package database;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Order {
     private int order_type_id;
@@ -58,6 +60,46 @@ public class Order {
         } catch (SQLException e) {
             System.out.println("Помилка: " + e.getMessage());
         }
+    }
+
+    public static String generateOrderString(int order_type_id) {
+        StringBuilder result = new StringBuilder();
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT u.name AS user_name, o.date AS order_date, a.product_name, oi.amount " +
+                "FROM users u " +
+                "JOIN orders o ON u.id = o.user_id " +
+                "JOIN order_items oi ON o.id = oi.order_id " +
+                "JOIN articles a ON oi.article_id = a.id " +
+                "WHERE o.order_type_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, order_type_id);
+            ResultSet rs = pstmt.executeQuery();
+
+            Map<String, Map<String, StringBuilder>> userOrderProductsMap = new HashMap<>();
+            while (rs.next()) {
+                String userName = rs.getString("user_name");
+                String orderDate = rs.getString("order_date");
+                String productName = rs.getString("product_name");
+                int amount = rs.getInt("amount");
+
+                Map<String, StringBuilder> orderProductsMap = userOrderProductsMap.computeIfAbsent(userName, k -> new HashMap<>());
+                StringBuilder productsForDate = orderProductsMap.computeIfAbsent(orderDate, k -> new StringBuilder());
+                productsForDate.append(productName).append(", кількість: ").append(amount).append("\n");
+            }
+            userOrderProductsMap.forEach((userName, orderProductsMap) -> {
+                orderProductsMap.forEach((orderDate, products) -> {
+                    result.append(userName).append(", ").append(orderDate).append(":\n").append(products).append("\n");
+                });
+            });
+
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+        }
+
+        return result.toString();
     }
 
 }

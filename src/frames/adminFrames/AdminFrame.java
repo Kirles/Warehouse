@@ -1,9 +1,7 @@
 package frames.adminFrames;
 
-import database.Article;
-import database.ArticleType;
-import database.Stock;
-import database.Warehouse;
+import com.sun.org.apache.xpath.internal.operations.Or;
+import database.*;
 import frames.ImagePanel;
 
 import javax.swing.*;
@@ -25,7 +23,7 @@ public class AdminFrame extends JFrame {
         AdminFrame af = new AdminFrame();
         af.setTitle("Warehouse");
         af.setResizable(false);
-        af.setSize(630, 500);
+        af.setSize(630, 400);
         af.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
@@ -123,7 +121,7 @@ public class AdminFrame extends JFrame {
         });
 
         queryLabel = new JLabel("Запити:");
-        queryLabel.setBounds(140, 220, 200, 25);
+        queryLabel.setBounds(280, 220, 200, 25);
         af.add(queryLabel);
 
         allArticlesButton = new JButton("Усі продукти на складах");
@@ -138,23 +136,29 @@ public class AdminFrame extends JFrame {
         });
 
         allSupplayButton = new JButton("Усі поставки");
-        allSupplayButton.setBounds(65, 300, 200, 25);
+        allSupplayButton.setBounds(350, 250, 200, 25);
 
         allSupplayButton.addActionListener(e -> {
-
-            //af.dispose();
+            JTextArea textArea = new JTextArea(20, 25);
+            textArea.setText(Order.generateOrderString(2));
+            textArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            JOptionPane.showMessageDialog(null, scrollPane, "Усі поставки", JOptionPane.PLAIN_MESSAGE);
         });
 
         allHelpsButton = new JButton("Уся допомога");
-        allHelpsButton.setBounds(65, 350, 200, 25);
+        allHelpsButton.setBounds(65, 300, 200, 25);
 
         allHelpsButton.addActionListener(e -> {
-
-            //af.dispose();
+            JTextArea textArea = new JTextArea(20, 25);
+            textArea.setText(Order.generateOrderString(1));
+            textArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            JOptionPane.showMessageDialog(null, scrollPane, "Уся допомога", JOptionPane.PLAIN_MESSAGE);
         });
 
         raportButton = new JButton("Звіт");
-        raportButton.setBounds(65, 400, 200, 25);
+        raportButton.setBounds(350, 300, 200, 25);
 
         raportButton.addActionListener(e -> {
 
