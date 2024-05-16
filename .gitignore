@@ -21,6 +21,7 @@ bin/
 /dist/
 /nbdist/
 /.nb-gradle/
+Warehouse.iml
 
 ### VS Code ###
 .vscode/
@@ -28,4 +29,3 @@ bin/
 ### Mac OS ###
 .DS_Store
 .idea/
-*.iml

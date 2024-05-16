@@ -145,4 +145,23 @@ public class Article {
             System.out.println("Помилка: " + e.getMessage());
         }
     }
+
+    public static String getArticleNames() {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT product_name FROM articles";
+        StringBuilder names = new StringBuilder();
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                names.append(rs.getString("product_name")).append("\n");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return names.toString();
+    }
 }

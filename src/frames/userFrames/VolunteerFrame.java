@@ -1,15 +1,20 @@
 package frames.userFrames;
 
-import database.Stock;
+import database.Article;
 import database.Warehouse;
 import frames.MyPanel;
 import frames.adminFrames.AddArticleFrame;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class VolunteerFrame extends JFrame {
 
     private static JButton allWarehouseButton, supplayButton, allArticlesButton;
+
+    public static void main(String[] args) {
+        frame(1);
+    }
 
     public static void frame(int user_id) {
         VolunteerFrame vf = new VolunteerFrame();
@@ -35,15 +40,15 @@ public class VolunteerFrame extends JFrame {
             JOptionPane.showMessageDialog(new AddArticleFrame(), Warehouse.getAllWarehouse(), "Гуманітарні центри", JOptionPane.PLAIN_MESSAGE);
         });
 
-        allArticlesButton = new JButton("Усі продукти на складах");
+        allArticlesButton = new JButton("Які продукти потребуються");
         allArticlesButton.setBounds(45, 175, 200, 25);
 
         allArticlesButton.addActionListener(e -> {
             JTextArea textArea = new JTextArea(20, 25);
-            textArea.setText(Stock.allWarehouseProduct());
+            textArea.setText(Article.getArticleNames());
             textArea.setEditable(false);
             JScrollPane scrollPane = new JScrollPane(textArea);
-            JOptionPane.showMessageDialog(null, scrollPane, "Продукти на складах", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, scrollPane, "Які продукти потребуються", JOptionPane.PLAIN_MESSAGE);
         });
 
 
