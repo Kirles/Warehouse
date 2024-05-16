@@ -149,5 +149,37 @@ public class Warehouse {
         }
     }
 
+    public static String generateWarehouseInfo() {
+        StringBuilder result = new StringBuilder();
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT " +
+                "  w.name AS warehouse_name, " +
+                "  SUM(CASE WHEN o.order_type_id = 2 THEN 1 ELSE 0 END) AS deliveries_count, " +
+                "  SUM(CASE WHEN o.order_type_id = 1 THEN 1 ELSE 0 END) AS aid_count " +
+                "FROM warehouses w " +
+                "LEFT JOIN orders o ON w.id = o.warehouse_id " +
+                "GROUP BY w.id";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                String warehouseName = rs.getString("warehouse_name");
+                int deliveriesCount = rs.getInt("deliveries_count");
+                int aidCount = rs.getInt("aid_count");
+
+                result.append(warehouseName)
+                        .append(":\n   Допомог: ").append(aidCount)
+                        .append("\n   Постачаннь: ").append(deliveriesCount)
+                        .append("\n\n");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+        }
+
+        return result.toString();
+    }
 
 }

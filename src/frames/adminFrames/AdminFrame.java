@@ -161,8 +161,11 @@ public class AdminFrame extends JFrame {
         raportButton.setBounds(350, 300, 200, 25);
 
         raportButton.addActionListener(e -> {
-
-            //af.dispose();
+            JTextArea textArea = new JTextArea(20, 25);
+            textArea.setText(Warehouse.generateWarehouseInfo());
+            textArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            JOptionPane.showMessageDialog(null, scrollPane, "Звіт", JOptionPane.PLAIN_MESSAGE);
         });
 
         af.add(allArticlesButton);
