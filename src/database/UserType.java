@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class UserType {
 
-    private String type;
+    private final String type;
 
     public UserType(String type) {
         this.type = type;

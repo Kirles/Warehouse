@@ -21,12 +21,12 @@ public class HelpSupplyFrame extends JFrame {
     private static JTable jt;
     private static int row;
 
-    private static String header[] = new String[] {
+    private static final String[] header = new String[] {
             "Article name",
             "Amount",
     };
 
-    private static DefaultTableModel dtm = new DefaultTableModel(0, 0) {
+    private static final DefaultTableModel dtm = new DefaultTableModel(0, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;

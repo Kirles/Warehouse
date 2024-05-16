@@ -3,8 +3,8 @@ package database;
 import java.sql.*;
 
 public class Address {
-    private String street;
-    private String building;
+    private final String street;
+    private final String building;
 
     public Address(String street, String building) {
         this.street = street;

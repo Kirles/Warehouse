@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Warehouse {
-    private String name;
-    private int address_id;
+    private final String name;
+    private final int address_id;
 
     public Warehouse(String name, int address_id) {
         this.name = name;

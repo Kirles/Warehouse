@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Order {
-    private int order_type_id;
-    private int user_id;
-    private boolean completed;
-    private String date;
-    private int warehouse_id;
+    private final int order_type_id;
+    private final int user_id;
+    private final boolean completed;
+    private final String date;
+    private final int warehouse_id;
 
     public Order(int order_type_id, int user_id, boolean completed, String date, int warehouse_id) {
         this.order_type_id = order_type_id;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleType {
-    private String type;
+    private final String type;
 
     public ArticleType(String type) {
         this.type = type;

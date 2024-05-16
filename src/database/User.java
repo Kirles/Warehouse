@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.sql.*;
 
 public class User {
-    private String name;
-    private String email;
-    private int user_type_id;
+    private final String name;
+    private final String email;
+    private final int user_type_id;
 
     public User(String name, String email, int user_type_id) {
         this.name = name;

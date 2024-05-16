@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Article {
-    private String name;
-    private float weight;
-    private String manufacture;
-    private int article_type_id;
+    private final String name;
+    private final float weight;
+    private final String manufacture;
+    private final int article_type_id;
     
     public Article(String name, float weight, String manufacture, int article_type_id) {
         this.name = name;

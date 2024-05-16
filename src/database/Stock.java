@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Stock {
-    private int article_id;
-    private int stock_amount;
-    private int warehouse_id;
+    private final int article_id;
+    private final int stock_amount;
+    private final int warehouse_id;
 
     public Stock(int article_id, int stock_amount, int warehouse_id) {
         this.article_id = article_id;
