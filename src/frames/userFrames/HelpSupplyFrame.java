@@ -33,10 +33,6 @@ public class HelpSupplyFrame extends JFrame {
         }
     };
 
-    public static void main(String[] args) {
-        frame(1, false);
-    }
-
     public static void frame(int user_id, boolean volunteer) {
         HelpSupplyFrame hf = new HelpSupplyFrame();
         hf.setTitle("Warehouse");
