@@ -26,7 +26,7 @@ public class UpdateArticleFrame extends JFrame {
         Article article = Article.getArticleByID(id);
 
         nameL = new JLabel();
-        nameL.setText("Name");
+        nameL.setText("Назва");
         nameL.setBounds(10, 20, 100, 25);
         uaf.add(nameL);
 
@@ -37,7 +37,7 @@ public class UpdateArticleFrame extends JFrame {
         uaf.add(nameF);
 
         weightL = new JLabel();
-        weightL.setText("Wight");
+        weightL.setText("Вага");
         weightL.setBounds(10, 70, 100, 25);
         uaf.add(weightL);
 
@@ -46,7 +46,7 @@ public class UpdateArticleFrame extends JFrame {
         uaf.add(weightF);
 
         manufL = new JLabel();
-        manufL.setText("Manufacture");
+        manufL.setText("Опис");
         manufL.setBounds(10, 120, 100, 25);
         uaf.add(manufL);
 
@@ -55,7 +55,7 @@ public class UpdateArticleFrame extends JFrame {
         uaf.add(manufF);
 
         artTypeL = new JLabel();
-        artTypeL.setText("Type");
+        artTypeL.setText("Тип");
         artTypeL.setBounds(10, 170, 100, 25);
         uaf.add(artTypeL);
 

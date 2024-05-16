@@ -20,7 +20,7 @@ public class AddArticleTypeFrame extends JFrame {
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
 
         typeL = new JLabel();
-        typeL.setText("Name");
+        typeL.setText("Назва");
         typeL.setBounds(10, 20, 100, 25);
         aatf.add(typeL);
 

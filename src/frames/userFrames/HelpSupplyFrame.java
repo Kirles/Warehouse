@@ -47,7 +47,7 @@ public class HelpSupplyFrame extends JFrame {
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
 
         nameL = new JLabel();
-        nameL.setText("Article name");
+        nameL.setText("Назва");
         nameL.setBounds(10, 10, 100, 25);
         hf.add(nameL);
 
@@ -59,7 +59,7 @@ public class HelpSupplyFrame extends JFrame {
         hf.add(nameF);
 
         amountL = new JLabel();
-        amountL.setText("Amount");
+        amountL.setText("Кількість");
         amountL.setBounds(10, 60, 100, 25);
         hf.add(amountL);
 

@@ -30,7 +30,7 @@ public class LoginFrame extends JFrame {
 
         emailField = new JTextField();
         emailField.setBounds(125, 75, 250, 25);
-        emailField.setText("Enter the email");
+        emailField.setText("Введіть пошту");
 
         loginButton = new JButton("Увійти");
         loginButton.setBounds(175, 150, 150, 25);

@@ -25,7 +25,7 @@ public class AddArticleFrame extends JFrame {
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
 
         nameL = new JLabel();
-        nameL.setText("Name");
+        nameL.setText("Назва");
         nameL.setBounds(10, 20, 100, 25);
         aaf.add(nameL);
 
@@ -34,7 +34,7 @@ public class AddArticleFrame extends JFrame {
         aaf.add(nameF);
 
         weightL = new JLabel();
-        weightL.setText("Wight");
+        weightL.setText("Вага");
         weightL.setBounds(10, 70, 100, 25);
         aaf.add(weightL);
 
@@ -43,7 +43,7 @@ public class AddArticleFrame extends JFrame {
         aaf.add(weightF);
 
         manufL = new JLabel();
-        manufL.setText("Manufacture");
+        manufL.setText("Опис");
         manufL.setBounds(10, 120, 100, 25);
         aaf.add(manufL);
 
@@ -52,7 +52,7 @@ public class AddArticleFrame extends JFrame {
         aaf.add(manufF);
 
         artTypeL = new JLabel();
-        artTypeL.setText("Type");
+        artTypeL.setText("Тип");
         artTypeL.setBounds(10, 170, 100, 25);
         aaf.add(artTypeL);
 

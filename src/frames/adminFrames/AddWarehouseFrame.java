@@ -22,7 +22,7 @@ public class AddWarehouseFrame extends JFrame {
         ImagePanel panel = new ImagePanel("source/nebo.jpg");
 
         nameL = new JLabel();
-        nameL.setText("Name");
+        nameL.setText("Назва");
         nameL.setBounds(10, 20, 100, 25);
         awf.add(nameL);
 
@@ -31,7 +31,7 @@ public class AddWarehouseFrame extends JFrame {
         awf.add(nameF);
 
         streetL = new JLabel();
-        streetL.setText("Street");
+        streetL.setText("Вулиця");
         streetL.setBounds(10, 70, 100, 25);
         awf.add(streetL);
 
@@ -40,7 +40,7 @@ public class AddWarehouseFrame extends JFrame {
         awf.add(streetF);
 
         buildL = new JLabel();
-        buildL.setText("Building");
+        buildL.setText("Будинок");
         buildL.setBounds(10, 120, 100, 25);
         awf.add(buildL);
 

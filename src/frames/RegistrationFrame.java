@@ -32,11 +32,11 @@ public class RegistrationFrame extends JFrame {
 
         nameField = new JTextField();
         nameField.setBounds(125, 100, 250, 25);
-        nameField.setText("Enter the name");
+        nameField.setText("Введіть ім'я");
 
         emailField = new JTextField();
         emailField.setBounds(125, 175, 250, 25);
-        emailField.setText("Enter the email");
+        emailField.setText("Введіть пошту");
 
         String[] options = { "Потерпілий", "Волонтер", "Адміністратор"};
         roleBox = new JComboBox<>(options);

@@ -108,7 +108,7 @@ public class Warehouse {
             pstmtWarehouse.setString(1, name);
             pstmtWarehouse.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Ошибка при удалении склада: " + e.getMessage());
+            System.out.println("Помилка: " + e.getMessage());
         }
     }
 
