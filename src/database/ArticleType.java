@@ -64,4 +64,18 @@ public class ArticleType {
         return -1;
     }
 
+    public static void deleteArticleType(String typeName) {
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "DELETE FROM article_type WHERE type = ?";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, typeName);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+        }
+    }
+
 }

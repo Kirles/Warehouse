@@ -80,6 +80,7 @@ public class UpdateArticleFrame extends JFrame {
                 Article newArticle = new Article(nameF.getText(), Float.parseFloat(weightF.getText()), manufF.getText(), category_id);
                 Article.updateArticle(id, newArticle);
                 uaf.dispose();
+                AdminFrame.frame();
             }
         });
 

@@ -2,6 +2,7 @@ package frames.adminFrames;
 
 import database.Article;
 import database.ArticleType;
+import database.Stock;
 import database.Warehouse;
 import frames.ImagePanel;
 
@@ -49,6 +50,7 @@ public class AdminFrame extends JFrame {
             if(selectedArticles != null) {
                UpdateArticleFrame.frame(Article.getArticleID(selectedArticles));
             }
+            af.dispose();
         });
 
         deleteArticleButton = new JButton("Видалити предмет");
@@ -79,8 +81,12 @@ public class AdminFrame extends JFrame {
         af.add(deleteArticleTypeButton);
 
         deleteArticleTypeButton.addActionListener(e -> {
-
-            af.dispose();
+           List<String> articleTypesList = ArticleType.getArticleTypes();
+           String[] articleTypes = articleTypesList.toArray(new String[0]);
+           String selectedArticleType = Warehouse.showComboBoxInputDialog(af, articleTypes, "Оберіть категорію:");
+            if(selectedArticleType != null) {
+                ArticleType.deleteArticleType(selectedArticleType);
+            }
         });
 
         addWarehouseButton = new JButton("Додати склад");
@@ -124,8 +130,11 @@ public class AdminFrame extends JFrame {
         allArticlesButton.setBounds(65, 250, 200, 25);
 
         allArticlesButton.addActionListener(e -> {
-
-            //af.dispose();
+            JTextArea textArea = new JTextArea(20, 25);
+            textArea.setText(Stock.allWarehouseProduct());
+            textArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            JOptionPane.showMessageDialog(null, scrollPane, "Продукти на складах", JOptionPane.PLAIN_MESSAGE);
         });
 
         allSupplayButton = new JButton("Усі поставки");

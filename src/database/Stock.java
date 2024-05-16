@@ -1,6 +1,8 @@
 package database;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Stock {
     private int article_id;
@@ -85,6 +87,38 @@ public class Stock {
             throw new RuntimeException("Помилка: " + e.getMessage());
         }
         return false;
+    }
+
+    public static String allWarehouseProduct() {
+        StringBuilder result = new StringBuilder();
+        String url = "jdbc:sqlite:warehouse.db";
+        String sql = "SELECT w.name AS warehouse_name, a.product_name, s.stock_amount " +
+                "FROM warehouses w " +
+                "JOIN stock s ON w.id = s.warehouse_id " +
+                "JOIN articles a ON s.article_id = a.id";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            Map<String, StringBuilder> warehouseProductsMap = new HashMap<>();
+
+            while (rs.next()) {
+                String warehouseName = rs.getString("warehouse_name");
+                String productName = rs.getString("product_name");
+                int stockAmount = rs.getInt("stock_amount");
+                StringBuilder warehouseProducts = warehouseProductsMap.computeIfAbsent(warehouseName, k -> new StringBuilder());
+                warehouseProducts.append(productName).append(", кількість: ").append(stockAmount).append("\n");
+            }
+            warehouseProductsMap.forEach((warehouse, products) -> {
+                result.append(warehouse).append(": ").append("\n").append(products).append("\n");
+            });
+
+        } catch (SQLException e) {
+            System.out.println("Помилка: " + e.getMessage());
+        }
+
+        return result.toString();
     }
 
 }
