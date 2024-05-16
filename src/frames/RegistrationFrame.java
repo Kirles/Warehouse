@@ -28,7 +28,7 @@ public class RegistrationFrame extends JFrame {
         rf.setSize(500, 450);
         rf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        ImagePanel panel = new ImagePanel("source/nebo.jpg");
+        MyPanel panel = new MyPanel();
 
         nameField = new JTextField();
         nameField.setBounds(125, 100, 250, 25);

@@ -2,7 +2,7 @@ package frames.userFrames;
 
 import database.Stock;
 import database.Warehouse;
-import frames.ImagePanel;
+import frames.MyPanel;
 import frames.adminFrames.AddArticleFrame;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class VolunteerFrame extends JFrame {
         vf.setSize(300, 300);
         vf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        ImagePanel panel = new ImagePanel("source/nebo.jpg");
+        MyPanel panel = new MyPanel();
 
         supplayButton = new JButton("Поставити продукти");
         supplayButton.setBounds(45, 50, 200, 25);

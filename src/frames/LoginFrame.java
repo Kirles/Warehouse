@@ -26,7 +26,7 @@ public class LoginFrame extends JFrame {
         lf.setSize(500, 250);
         lf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        ImagePanel panel = new ImagePanel("source/nebo.jpg");
+        MyPanel panel = new MyPanel();
 
         emailField = new JTextField();
         emailField.setBounds(125, 75, 250, 25);

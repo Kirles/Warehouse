@@ -2,7 +2,7 @@ package frames.adminFrames;
 
 import database.Article;
 import database.ArticleType;
-import frames.ImagePanel;
+import frames.MyPanel;
 
 import javax.swing.*;
 import java.util.List;
@@ -22,7 +22,7 @@ public class AddArticleFrame extends JFrame {
         aaf.setSize(400, 320);
         aaf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        ImagePanel panel = new ImagePanel("source/nebo.jpg");
+        MyPanel panel = new MyPanel();
 
         nameL = new JLabel();
         nameL.setText("Назва");

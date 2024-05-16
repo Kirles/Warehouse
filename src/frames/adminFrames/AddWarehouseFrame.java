@@ -2,7 +2,7 @@ package frames.adminFrames;
 
 import database.Address;
 import database.Warehouse;
-import frames.ImagePanel;
+import frames.MyPanel;
 
 import javax.swing.*;
 
@@ -19,7 +19,7 @@ public class AddWarehouseFrame extends JFrame {
         awf.setSize(400, 260);
         awf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        ImagePanel panel = new ImagePanel("source/nebo.jpg");
+        MyPanel panel = new MyPanel();
 
         nameL = new JLabel();
         nameL.setText("Назва");

@@ -1,6 +1,7 @@
 package frames;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class AuthFrame extends JFrame {
 
@@ -13,7 +14,7 @@ public class AuthFrame extends JFrame {
         af.setSize(450, 250);
         af.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        ImagePanel panel = new ImagePanel("source/nebo.jpg");
+        MyPanel panel = new MyPanel();
 
         loginButton = new JButton("Увійти");
         loginButton.setBounds(40, 75, 150, 25);
@@ -37,6 +38,7 @@ public class AuthFrame extends JFrame {
 
         af.setVisible(true);
     }
+
 
 }
 

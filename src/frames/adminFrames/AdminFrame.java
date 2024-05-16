@@ -1,8 +1,7 @@
 package frames.adminFrames;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
 import database.*;
-import frames.ImagePanel;
+import frames.MyPanel;
 
 import javax.swing.*;
 import java.util.List;
@@ -26,7 +25,7 @@ public class AdminFrame extends JFrame {
         af.setSize(630, 400);
         af.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        ImagePanel panel = new ImagePanel("source/nebo.jpg");
+        MyPanel panel = new MyPanel();
 
         addArticleButton = new JButton("Додати предмет");
         addArticleButton.setBounds(30, 50, 150, 25);

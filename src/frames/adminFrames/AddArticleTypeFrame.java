@@ -1,7 +1,7 @@
 package frames.adminFrames;
 
 import database.ArticleType;
-import frames.ImagePanel;
+import frames.MyPanel;
 
 import javax.swing.*;
 
@@ -17,7 +17,7 @@ public class AddArticleTypeFrame extends JFrame {
         aatf.setSize(400, 150);
         aatf.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        ImagePanel panel = new ImagePanel("source/nebo.jpg");
+        MyPanel panel = new MyPanel();
 
         typeL = new JLabel();
         typeL.setText("Назва");
