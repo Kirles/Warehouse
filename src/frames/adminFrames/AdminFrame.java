@@ -82,7 +82,8 @@ public class AdminFrame extends JFrame {
            String[] articleTypes = articleTypesList.toArray(new String[0]);
            String selectedArticleType = Warehouse.showComboBoxInputDialog(af, articleTypes, "Оберіть категорію:");
             if(selectedArticleType != null) {
-                ArticleType.deleteArticleType(selectedArticleType);
+                String result = ArticleType.deleteArticleType(selectedArticleType);
+                JOptionPane.showMessageDialog(null, result, "Результат", JOptionPane.PLAIN_MESSAGE);
             }
         });
 
@@ -104,6 +105,7 @@ public class AdminFrame extends JFrame {
             String selectedWarehouse = Warehouse.showComboBoxInputDialog(af, warehouses, "Оберіть склад:");
             if(selectedWarehouse != null) {
                 UpdateWarehouseFrame.frame(selectedWarehouse);
+                af.dispose();
             }
         });
 
